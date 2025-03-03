@@ -221,3 +221,40 @@ def subject_list(request):
     return render(request,'subject/list.html',stx)
 
 
+def teacher_create(request):
+    model = Teacher()
+    form = TeacherForm(request.POST or None,instance=model)
+    if request.POST and form.is_valid():
+        form.save()
+        return redirect('teacher_list')
+
+    stx = {
+        "form":form
+    }
+    return render(request,'teacher/form.html',stx)
+
+
+def teacher_edit(request,pk):
+    model = Teacher.objects.get(pk=pk)
+    form = TeacherForm(request.POST or None, instance=model)
+    if request.POST and form.is_valid():
+        form.save()
+        return redirect('teacher_list')
+
+    stx = {
+        "form": form,
+        "model":model
+    }
+    return render(request, 'teacher/form.html', stx)
+
+def teacher_delete(request,pk):
+    model = Teacher.objects.get(pk=pk)
+    model.delete()
+    return redirect('teacher_list')
+
+def teacher_list(request):
+    teachers = services.get_teacher()
+    stx = {
+        "teachers":teachers
+    }
+    return render(request,'teacher/list.html',stx)

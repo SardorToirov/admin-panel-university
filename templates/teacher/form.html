@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="overview-wrap">
-                            <h2 class="title-1">Add Kafedra</h2>
+                            <h2 class="title-1">Add Teacher</h2>
                         </div>
                     </div>
                 </div>
@@ -30,8 +30,12 @@
                                 <form method="post">
                                     {% csrf_token %}
                                     <div class="form-group">
-                                        <label class=" form-control-label">Name</label>
-                                        {{ form.name }}
+                                        <label class=" form-control-label">first_name</label>
+                                        {{ form.first_name }}
+                                        <label class=" form-control-label">last_name</label>
+                                        {{ form.last_name }}
+                                        <label class=" form-control-label">subject</label>
+                                        {{ form.subject }}
                                     </div>
 
                                     {% if model %}
