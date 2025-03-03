@@ -32,10 +32,16 @@ def login_page(request):
 def home_page(request):
     faculties = services.get_faculties()
     kafedras = services.get_kafedra()
+    guruhs = services.get_guruh()
+    subjects = services.get_subject()
+    teachers = services.get_teacher()
     ctx = {
         'counts': {
             'faculties': len(faculties),
             'kafedras': len(kafedras),
+            'guruhs':len(guruhs),
+            'subjects':len(subjects),
+            'teachers':len(teachers)
         }
     }
     return render(request, 'index.html', ctx)
@@ -220,7 +226,7 @@ def subject_list(request):
     }
     return render(request,'subject/list.html',stx)
 
-
+@login_required_decorator
 def teacher_create(request):
     model = Teacher()
     form = TeacherForm(request.POST or None,instance=model)
@@ -233,7 +239,7 @@ def teacher_create(request):
     }
     return render(request,'teacher/form.html',stx)
 
-
+@login_required_decorator
 def teacher_edit(request,pk):
     model = Teacher.objects.get(pk=pk)
     form = TeacherForm(request.POST or None, instance=model)
@@ -246,12 +252,12 @@ def teacher_edit(request,pk):
         "model":model
     }
     return render(request, 'teacher/form.html', stx)
-
+@login_required_decorator
 def teacher_delete(request,pk):
     model = Teacher.objects.get(pk=pk)
     model.delete()
     return redirect('teacher_list')
-
+@login_required_decorator
 def teacher_list(request):
     teachers = services.get_teacher()
     stx = {

@@ -141,7 +141,7 @@
                                         <i class="zmdi zmdi-shopping-cart"></i>
                                     </div>
                                     <div class="text">
-                                        <h2>{{ counts.groups|intcomma }}</h2>
+                                        <h2>{{ counts.guruhs|intcomma }}</h2>
                                         <span>Groups</span>
                                     </div>
                                 </div>
@@ -234,7 +234,7 @@
           datasets: [
             {
               label: "My First dataset",
-              data: [{{ counts.faculties|intcomma}},{{ counts.kafedras|intcomma }}],
+              data: [{{ counts.faculties|intcomma}},{{ counts.kafedras|intcomma }},{{ counts.guruhs|intcomma }}],
               borderColor: "rgba(0, 123, 255, 0.9)",
               borderWidth: "0",
               backgroundColor: "rgba(0, 123, 255, 0.5)"
