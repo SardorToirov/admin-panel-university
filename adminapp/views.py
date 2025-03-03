@@ -35,13 +35,15 @@ def home_page(request):
     guruhs = services.get_guruh()
     subjects = services.get_subject()
     teachers = services.get_teacher()
+    students = services.get_student()
     ctx = {
         'counts': {
             'faculties': len(faculties),
             'kafedras': len(kafedras),
             'guruhs':len(guruhs),
             'subjects':len(subjects),
-            'teachers':len(teachers)
+            'teachers':len(teachers),
+            'students':len(students)
         }
     }
     return render(request, 'index.html', ctx)

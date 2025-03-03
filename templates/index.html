@@ -230,11 +230,20 @@
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ["Fakultet","Kafedra","Guruh"],
+          labels: ["Fakultet","Kafedra","Guruh","Subject","Teacher","Student"],
           datasets: [
             {
               label: "My First dataset",
-              data: [{{ counts.faculties|intcomma}},{{ counts.kafedras|intcomma }},{{ counts.guruhs|intcomma }}],
+              data: [
+
+              {{ counts.faculties|intcomma}},
+              {{ counts.kafedras|intcomma }},
+              {{ counts.guruhs|intcomma }},
+              {{ counts.subjects|intcomma }},
+              {{ counts.teachers|intcomma }},
+              {{ counts.students|intcomma }}
+
+              ],
               borderColor: "rgba(0, 123, 255, 0.9)",
               borderWidth: "0",
               backgroundColor: "rgba(0, 123, 255, 0.5)"
@@ -281,8 +290,18 @@
         type: 'pie',
         data: {
           datasets: [{
-            data: [45, 25, 20, 10],
+            data: [
+              {{ counts.faculties|intcomma}},
+              {{ counts.kafedras|intcomma }},
+              {{ counts.guruhs|intcomma }},
+              {{ counts.subjects|intcomma }},
+              {{ counts.teachers|intcomma }},
+              {{ counts.students|intcomma }}
+            ],
             backgroundColor: [
+              "rgba(0, 123, 255,0.9)",
+              "rgba(0, 123, 255,0.7)",
+              "rgba(0, 123, 255,0.5)",
               "rgba(0, 123, 255,0.9)",
               "rgba(0, 123, 255,0.7)",
               "rgba(0, 123, 255,0.5)",
@@ -292,15 +311,14 @@
               "rgba(0, 123, 255,0.9)",
               "rgba(0, 123, 255,0.7)",
               "rgba(0, 123, 255,0.5)",
+              "rgba(0, 123, 255,0.9)",
+              "rgba(0, 123, 255,0.7)",
+              "rgba(0, 123, 255,0.5)",
               "rgba(0,0,0,0.07)"
             ]
 
           }],
-          labels: [
-            "Green",
-            "Green",
-            "Green"
-          ]
+          labels: ["Fakultet","Kafedra","Guruh","Subject","Teacher","Student"],
         },
         options: {
           legend: {
