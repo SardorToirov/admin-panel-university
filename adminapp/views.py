@@ -55,6 +55,15 @@ def faculty_create(request):
     form = FacultyForm(request.POST or None, instance=model)
     if request.POST and form.is_valid():
         form.save()
+
+        actions = request.session.get('actions',[])
+        actions += [f"You edited faculty: {request.POST.get('name')}"]
+        request.session["actions"] = actions
+
+        faculty_count = request.session.get('faculty_count', 0)
+        faculty_count += 1
+        request.session["faculty_count"] = faculty_count
+
         return redirect('faculty_list')
     ctx = {
         "form": form
@@ -68,6 +77,14 @@ def faculty_edit(request, pk):
     form = FacultyForm(request.POST or None, instance=model)
     if request.POST and form.is_valid():
         form.save()
+        actions = request.session.get('actions',[])
+        actions += [f"You edited faculty: {request.POST.get('name')}"]
+        request.session["actions"] = actions
+
+        faculty_count = request.session.get('faculty_count', 0)
+        faculty_count += 1
+        request.session["faculty_count"] = faculty_count
+
         return redirect('faculty_list')
     ctx = {
         "model": model,
@@ -100,6 +117,14 @@ def kafedra_create(request):
     form = KafedraForm(request.POST or None, instance=model)
     if request.POST and form.is_valid():
         form.save()
+        actions = request.session.get('actions', [])
+        actions += [f"You created kafedra: {request.POST.get('name')}"]
+        request.session["actions"] = actions
+
+        kafedra_count = request.session.get('kafedra_count', 0)
+        kafedra_count += 1
+        request.session["kafedra_count"] = kafedra_count
+
         return redirect('kafedra_list')
     ctx = {
         "form": form
@@ -113,6 +138,11 @@ def kafedra_edit(request, pk):
     form = KafedraForm(request.POST or None, instance=model)
     if request.POST and form.is_valid():
         form.save()
+        actions = request.session.get('actions',[])
+        actions += [f"You edited kafedra: {request.POST.get('name')}"]
+        request.session["actions"] = actions
+        return redirect('kafedra_list')
+
         return redirect('kafedra_list')
     ctx = {
         "model": model,
@@ -268,7 +298,7 @@ def teacher_list(request):
     }
     return render(request,'teacher/list.html',stx)
 
-
+@login_required_decorator
 @login_required(login_url='login_page')
 def student_create(request):
     model = Student()
@@ -281,7 +311,7 @@ def student_create(request):
     }
     return render(request, 'student/form.html', ctx)
 
-
+@login_required_decorator
 def student_edit(request,pk):
     module = Student.objects.get(pk=pk)
     form = StudentForm(request.POST or None,request.FILES or None,instance=module)
@@ -294,14 +324,20 @@ def student_edit(request,pk):
     }
     return render(request,'student/form.html',stx)
 
+@login_required_decorator
 def student_delete(request,pk):
     model = Student.objects.get(pk=pk)
     model.delete()
     return redirect('student_list')
 
+@login_required_decorator
 def student_list(request):
     students = services.get_student()
     stx = {
         "students": students
     }
     return render(request, 'student/list.html', stx)
+
+@login_required_decorator
+def profile(request):
+    return render(request,'profile.html')
