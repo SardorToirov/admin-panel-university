@@ -44,7 +44,7 @@ class Student(models.Model):
     last_name = models.CharField(max_length=100, null=False, blank=False)
     age = models.SmallIntegerField()
     guruh = models.ForeignKey(Guruh, on_delete=models.SET_NULL, null=True, blank=True)
-    img = models.ImageField(upload_to='images', null=True, blank=True, default='images/default.png')  # Default rasm
+    img = models.ImageField(upload_to='images', null=True, blank=True, default='images/img.png')
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
