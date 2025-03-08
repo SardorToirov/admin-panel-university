@@ -1,6 +1,6 @@
 from django.db import models
 
-
+#University models
 class Faculty(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
 
@@ -33,7 +33,7 @@ class Subject(models.Model):
 class Teacher(models.Model):
     first_name = models.CharField(max_length=100, null=False, blank=False)
     last_name = models.CharField(max_length=100, null=False, blank=False)
-    subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, null=True, blank=True)
+    subjects = models.ManyToManyField(Subject, blank=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -44,4 +44,7 @@ class Student(models.Model):
     last_name = models.CharField(max_length=100, null=False, blank=False)
     age = models.SmallIntegerField()
     guruh = models.ForeignKey(Guruh, on_delete=models.SET_NULL, null=True, blank=True)
+    img = models.ImageField(upload_to='images', null=True, blank=True, default='images/default.png')  # Default rasm
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"

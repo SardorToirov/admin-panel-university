@@ -27,7 +27,7 @@
                                 <small> Form</small>
                             </div>
                             <div class="card-body card-block">
-                                <form method="post">
+                                <form method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <div class="form-group">
                                         <label class=" form-control-label">First name</label>
@@ -38,6 +38,8 @@
                                         {{ form.age }}
                                         <label class=" form-control-label">Group</label>
                                         {{ form.guruh }}
+                                        <label class=" form-control-label">Img</label>
+                                        {{ form.img }}
                                     </div>
 
                                     {% if model %}

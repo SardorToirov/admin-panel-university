@@ -269,20 +269,22 @@ def teacher_list(request):
     return render(request,'teacher/list.html',stx)
 
 
+@login_required(login_url='login_page')
 def student_create(request):
-    module = Student()
-    form = StudentForm(request.POST or None,instance=module)
-    if request.POST and form.is_valid():
+    model = Student()
+    form = StudentForm(request.POST or None, request.FILES or None, instance=model)
+    if request.method == "POST" and form.is_valid():
         form.save()
         return redirect('student_list')
-    stx = {
-        "form":form
+    ctx = {
+        "form": form
     }
-    return render(request,'student/form.html',stx)
+    return render(request, 'student/form.html', ctx)
+
 
 def student_edit(request,pk):
     module = Student.objects.get(pk=pk)
-    form = StudentForm(request.POST or None,instance=module)
+    form = StudentForm(request.POST or None,request.FILES or None,instance=module)
     if request.POST and form.is_valid():
         form.save()
         return redirect('student_list')
@@ -300,6 +302,6 @@ def student_delete(request,pk):
 def student_list(request):
     students = services.get_student()
     stx = {
-        "students":students
+        "students": students
     }
-    return render(request,'student/list.html',stx)
+    return render(request, 'student/list.html', stx)

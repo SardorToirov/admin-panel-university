@@ -33,6 +33,7 @@
                                         <th>Last name</th>
                                         <th>Age</th>
                                         <th>Group</th>
+                                        <th>img</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -44,6 +45,7 @@
                                         <td>{{ i.last_name }}</td>
                                         <td>{{ i.age }}</td>
                                         <td>{{ i.guruh }}</td>
+                                        <td><img src="/media/{{i.img}}" alt="photo" width="40px" height="50px"></td>
                                         <td>
                                             <div class="table-data-feature">
                                                 <a class="item" data-toggle="tooltip" href="{% url 'student_edit' pk=i.id %}" data-placement="top" title="" data-original-title="Edit">

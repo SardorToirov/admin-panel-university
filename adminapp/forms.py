@@ -25,7 +25,7 @@ class GuruhForm(forms.ModelForm):
         model = Guruh
         fields = "__all__"
         widgets = {
-            "faculty": forms.Select(attrs={'class': 'form-control'}),  # ForeignKey uchun qo‘shildi
+            "faculty": forms.Select(attrs={'class': 'form-control'}),
             "name": forms.TextInput(attrs={'class': 'form-control'})
         }
 
@@ -36,6 +36,7 @@ class SubjectForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             "name": forms.TextInput(attrs={'class': 'form-control'})
+
         }
 
 
@@ -46,7 +47,7 @@ class TeacherForm(forms.ModelForm):
         widgets = {
             "first_name": forms.TextInput(attrs={'class': 'form-control'}),
             "last_name": forms.TextInput(attrs={'class': 'form-control'}),
-            "subject": forms.Select(attrs={'class': 'form-control'})  # ForeignKey uchun qo‘shildi
+            "subjects": forms.SelectMultiple(attrs={'class': 'form-control'})
         }
 
 
@@ -58,5 +59,6 @@ class StudentForm(forms.ModelForm):
             "first_name": forms.TextInput(attrs={'class': 'form-control'}),
             "last_name": forms.TextInput(attrs={'class': 'form-control'}),
             "age": forms.NumberInput(attrs={'class': 'form-control'}),
-            "guruh": forms.Select(attrs={'class': 'form-control'})  # ForeignKey uchun qo‘shildi
+            "guruh": forms.Select(attrs={'class': 'form-control'}),
+            "img": forms.ClearableFileInput(attrs={'class': 'form-control'})
         }

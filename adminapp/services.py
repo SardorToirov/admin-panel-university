@@ -7,14 +7,6 @@ def dictfetchall(cursor):
     return [dict(zip(columns, row)) for row in cursor.fetchall()]
 
 
-def dictfetchone(cursor):
-    row = cursor.fetchone()
-    if row is None:
-        return False
-    columns = [col[0] for col in cursor.description]
-    return dict(zip(columns, row))
-
-
 def table_exists(table_name):
     """ Jadval bazada mavjudligini tekshiradi """
     with closing(connection.cursor()) as cursor:
@@ -55,16 +47,28 @@ def get_subject():
 
 
 def get_teacher():
-    if table_exists("adminapp_teacher"):
+    if table_exists("adminapp_teacher") and table_exists("adminapp_subject") and table_exists("adminapp_teacher_subjects"):
         with closing(connection.cursor()) as cursor:
-            cursor.execute("SELECT * FROM adminapp_teacher")
+            cursor.execute("""
+                SELECT t.id, t.first_name, t.last_name, GROUP_CONCAT(s.name) as subjects
+                FROM adminapp_teacher t
+                LEFT JOIN adminapp_teacher_subjects ts ON t.id = ts.teacher_id
+                LEFT JOIN adminapp_subject s ON ts.subject_id = s.id
+                GROUP BY t.id, t.first_name, t.last_name
+            """)
             return dictfetchall(cursor)
     return []
 
 
 def get_student():
-    if table_exists("adminapp_student"):
+    if table_exists("adminapp_student") and table_exists("adminapp_guruh"):
         with closing(connection.cursor()) as cursor:
-            cursor.execute("SELECT * FROM adminapp_student")
+            cursor.execute("""
+                SELECT s.id, s.first_name, s.last_name, s.age, 
+                       COALESCE(s.img, 'images/img.png') as img, 
+                       g.name as guruh_name
+                FROM adminapp_student s
+                LEFT JOIN adminapp_guruh g ON s.guruh_id = g.id
+            """)
             return dictfetchall(cursor)
     return []

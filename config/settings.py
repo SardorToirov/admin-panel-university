@@ -78,13 +78,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': "univercity_db",
-#         'USER': "admin",
-#         'PASSWORD': 'root',
+#         'NAME': 'first_db',
+#         'USER': 'Sardor',
+#         'PASSWORD': 'admin',
 #         'HOST': '127.0.0.1',
-#         'PORT': '5433',
+#         'PORT': '5433',  # Bu joyda PORTni to'g'ri kiriting
 #     }
 # }
+
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -130,6 +133,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR.joinpath('static')]
+
+MEDIA_ROOT = BASE_DIR.joinpath('media')
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

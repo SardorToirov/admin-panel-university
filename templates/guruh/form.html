@@ -30,7 +30,9 @@
                                 <form method="post">
                                     {% csrf_token %}
                                     <div class="form-group">
-                                        <label class=" form-control-label">Name</label>
+                                        <label class=" form-control-label">Faculty Name</label>
+                                        {{ form.faculty }}
+                                        <label class=" form-control-label">Group Name</label>
                                         {{ form.name }}
                                     </div>
 

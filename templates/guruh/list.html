@@ -30,6 +30,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
+                                        <th>Faculty</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -38,6 +39,8 @@
                                     <tr>
                                         <td>{{ i.id }}</td>
                                         <td>{{ i.name }}</td>
+                                        <td>{{ i.faculty }}</td>
+
                                         <td>
                                             <div class="table-data-feature">
                                                 <a class="item" data-toggle="tooltip" href="{% url 'guruh_edit' pk=i.id %}" data-placement="top" title="" data-original-title="Edit">
