@@ -143,7 +143,6 @@ def kafedra_edit(request, pk):
         request.session["actions"] = actions
         return redirect('kafedra_list')
 
-        return redirect('kafedra_list')
     ctx = {
         "model": model,
         "form": form
@@ -173,6 +172,14 @@ def guruh_created(request):
     form = GuruhForm(request.POST or None,instance=model)
     if request.POST and form.is_valid():
         form.save()
+        actions = request.session.get('actions', [])
+        actions += [f"You created Group: {request.POST.get('name')}"]
+        request.session["actions"] = actions
+
+        group_count = request.session.get('group_count', 0)
+        group_count += 1
+        request.session["group_count"] = group_count
+
         return redirect('guruh_list')
 
     stx = {
@@ -219,6 +226,14 @@ def subject_created(request):
     form = SubjectForm(request.POST or None,instance=model)
     if request.POST and form.is_valid():
         form.save()
+        actions = request.session.get('actions', [])
+        actions += [f"You created Subject: {request.POST.get('name')}"]
+        request.session["actions"] = actions
+
+        subject_count = request.session.get('subject_count', 0)
+        subject_count += 1
+        request.session["subject_count"] = subject_count
+
         return redirect('subject_list')
 
     stx = {
@@ -264,6 +279,14 @@ def teacher_create(request):
     form = TeacherForm(request.POST or None,instance=model)
     if request.POST and form.is_valid():
         form.save()
+        actions = request.session.get('actions', [])
+        actions += [f"You created Teacher: {request.POST.get('first_name')}"]
+        request.session["actions"] = actions
+
+        teacher_count = request.session.get('teacher_count', 0)
+        teacher_count += 1
+        request.session["teacher_count"] = teacher_count
+
         return redirect('teacher_list')
 
     stx = {
@@ -283,6 +306,7 @@ def teacher_edit(request,pk):
         "form": form,
         "model":model
     }
+
     return render(request, 'teacher/form.html', stx)
 @login_required_decorator
 def teacher_delete(request,pk):
@@ -305,6 +329,14 @@ def student_create(request):
     form = StudentForm(request.POST or None, request.FILES or None, instance=model)
     if request.method == "POST" and form.is_valid():
         form.save()
+
+        actions = request.session.get('actions', [])
+        actions += [f"You created Student: {request.POST.get('first_name')}"]
+        request.session["actions"] = actions
+
+        student_count = request.session.get('student_count', 0)
+        student_count += 1
+        request.session["student_count"] = student_count
         return redirect('student_list')
     ctx = {
         "form": form
