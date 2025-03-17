@@ -5,6 +5,7 @@ urlpatterns = [
     path('',home_page, name='home_page'),
     path('login_page/',login_page, name='login_page'),
     path('logout_page/',logout_page, name='logout_page'),
+    path('signup/', SignUpView.as_view(), name='signup'),
 
     path('faculty/create/',faculty_create, name='faculty_create'),
     path('faculty/<int:pk>/edit/',faculty_edit, name='faculty_edit'),
