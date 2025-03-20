@@ -49,6 +49,11 @@ python manage.py runserver
 2️⃣ Kiritilgan **superfoydalanuvchi login ma’lumotlari** bilan tizimga kiring.
 3️⃣ Admin panel imkoniyatlaridan **foydalaning**.
 
+![image](https://github.com/user-attachments/assets/158df693-9b1f-4df1-a5ca-47913044fd49)
+![image](https://github.com/user-attachments/assets/2f7590d1-6011-4fd7-8693-c055466986d3)
+
+
+
 ---
 
 ## 🏗 Texnologiyalar
@@ -72,4 +77,6 @@ Bu loyiha **[MIT](LICENSE)** litsenziyasi asosida tarqatiladi.
 
 📌 **Muallif:** [Sardor]  
 📧 **Bog‘lanish:** [https://sardortoirov62@gmail.com]
+
+** sayt: ** [https://admin-panel-university-2.onrender.com/profile/]
 
